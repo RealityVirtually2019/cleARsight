@@ -1,0 +1,275 @@
+{
+ "entries": [
+  {
+   "compression": 8,
+   "hash": "7c8c0747346da6d7dbc7a475c6ac30959b74eb3f",
+   "pkgpath": "Data/095890d8c9bde1a45b549a17e6e6f961",
+   "size": 5036,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/095890d8c9bde1a45b549a17e6e6f961"
+  },
+  {
+   "compression": 8,
+   "hash": "ec9812d5bed96ac6cb9d3867729610e4e8138258",
+   "pkgpath": "Data/Managed/Metadata/global-metadata.dat",
+   "size": 2812904,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/Managed/Metadata/global-metadata.dat"
+  },
+  {
+   "compression": 8,
+   "hash": "7a1284d3eed3e218a7916b5700fe8aea9f71549d",
+   "pkgpath": "bin/libil2cpp.so",
+   "size": 34393160,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/Native/libil2cpp.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "C:\\Users\\Player\\Downloads\\privatekey\\petertest.cert"
+    },
+    "taildata": {
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "e55c0c461b8103080d6868bbaeb05fbffdd91605",
+   "xfrm_path": "C:/Users/Player/Desktop/MagicLeap_Test/.out/.cache/release_lumin_clang-3.8_aarch64/com.peter.testmesh-25430d9cae968e8d\\libil2cpp.so-915926f9cc659555",
+   "xfrm_size": 34393918
+  },
+  {
+   "compression": 8,
+   "hash": "dc64ed4bee950e5ce1ab12268f627a3db179e4af",
+   "pkgpath": "bin/AudioPluginMSASpatializer.so",
+   "size": 220456,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/Plugins/AudioPluginMSASpatializer.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "C:\\Users\\Player\\Downloads\\privatekey\\petertest.cert"
+    },
+    "taildata": {
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "7681786c8dd39db8e2ccc5187e28ac6b2a627cb4",
+   "xfrm_path": "C:/Users/Player/Desktop/MagicLeap_Test/.out/.cache/release_lumin_clang-3.8_aarch64/com.peter.testmesh-25430d9cae968e8d\\AudioPluginMSASpatializer.so-36275ae022eedaad",
+   "xfrm_size": 221214
+  },
+  {
+   "compression": 8,
+   "hash": "aed32544e1ea67c511396569fcb89b586b15d839",
+   "pkgpath": "bin/UnityEngine.SpatialTracking.dll",
+   "size": 9216,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/Plugins/UnityEngine.SpatialTracking.dll"
+  },
+  {
+   "compression": 8,
+   "hash": "715f293d231a26472ba1672c3e59f76cb0e5e364",
+   "pkgpath": "bin/UnityEngine.TestRunner.dll",
+   "size": 65536,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/Plugins/UnityEngine.TestRunner.dll"
+  },
+  {
+   "compression": 8,
+   "hash": "d93ff7b64d92abd6dbb8419c3348ab5f56ad5ec5",
+   "pkgpath": "bin/UnityMagicLeap.so",
+   "size": 728232,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/Plugins/UnityMagicLeap.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "C:\\Users\\Player\\Downloads\\privatekey\\petertest.cert"
+    },
+    "taildata": {
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "7fe9484e242a35f6929e2289fce9a67af90dbbb9",
+   "xfrm_path": "C:/Users/Player/Desktop/MagicLeap_Test/.out/.cache/release_lumin_clang-3.8_aarch64/com.peter.testmesh-25430d9cae968e8d\\UnityMagicLeap.so-36275ae022eedaad",
+   "xfrm_size": 728990
+  },
+  {
+   "compression": 8,
+   "hash": "a765bb75be250a6992c1a46fc23a55501e369b85",
+   "pkgpath": "bin/libml_camera_plugin.so",
+   "size": 14184,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/Plugins/libml_camera_plugin.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "C:\\Users\\Player\\Downloads\\privatekey\\petertest.cert"
+    },
+    "taildata": {
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "a523fa4ce67e66b6dba70141e1dddd5235b2d64f",
+   "xfrm_path": "C:/Users/Player/Desktop/MagicLeap_Test/.out/.cache/release_lumin_clang-3.8_aarch64/com.peter.testmesh-25430d9cae968e8d\\libml_camera_plugin.so-36275ae022eedaad",
+   "xfrm_size": 14942
+  },
+  {
+   "compression": 8,
+   "hash": "633780c922a0dbfe032638afff9a25e3fc49219f",
+   "pkgpath": "bin/libml_mediaplayer_plugin.so",
+   "size": 38792,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/Plugins/libml_mediaplayer_plugin.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "C:\\Users\\Player\\Downloads\\privatekey\\petertest.cert"
+    },
+    "taildata": {
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "6698fb5bcb18081bd97662462c6ca62b255c6349",
+   "xfrm_path": "C:/Users/Player/Desktop/MagicLeap_Test/.out/.cache/release_lumin_clang-3.8_aarch64/com.peter.testmesh-25430d9cae968e8d\\libml_mediaplayer_plugin.so-36275ae022eedaad",
+   "xfrm_size": 39550
+  },
+  {
+   "compression": 8,
+   "hash": "5629c7ff5fb59ddc72778d4b9d3dbadcde480998",
+   "pkgpath": "bin/nunit.framework.dll",
+   "size": 328192,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/Plugins/nunit.framework.dll"
+  },
+  {
+   "compression": 8,
+   "hash": "e6124da6073b916e29e013cf3ae3f58a4c5fdb0e",
+   "pkgpath": "Data/Resources/mscorlib.dll-resources.dat",
+   "size": 337563,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/Resources/mscorlib.dll-resources.dat"
+  },
+  {
+   "compression": 8,
+   "hash": "dc1423ee40a78f4701880b37e1f07bc4f3500e9d",
+   "pkgpath": "Data/Resources/unity default resources",
+   "size": 3308004,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/Resources/unity default resources"
+  },
+  {
+   "compression": 8,
+   "hash": "1c281a7abd7f0cec77eb390c3aa4d795a656335e",
+   "pkgpath": "Data/Resources/unity_builtin_extra",
+   "size": 393452,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/Resources/unity_builtin_extra"
+  },
+  {
+   "compression": 8,
+   "hash": "9bbb5e3aae616602db933abd34140e11132fccea",
+   "pkgpath": "Data/UnitySubsystems/Runtime/UnitySubsystemsManifest.json",
+   "size": 438,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/UnitySubsystems/Runtime/UnitySubsystemsManifest.json"
+  },
+  {
+   "compression": 8,
+   "hash": "e94169e04982098c15b71dea64d4bb6da942f232",
+   "pkgpath": "Data/boot.config",
+   "size": 76,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/boot.config"
+  },
+  {
+   "compression": 8,
+   "hash": "a35ab9fbf033d218e0ea192dc8efc7d6971494f2",
+   "pkgpath": "Data/globalgamemanagers",
+   "size": 35576,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/globalgamemanagers"
+  },
+  {
+   "compression": 8,
+   "hash": "cea83d1c664878806b9e8d4a1409da08a3866220",
+   "pkgpath": "Data/globalgamemanagers.assets",
+   "size": 36168,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/globalgamemanagers.assets"
+  },
+  {
+   "compression": 8,
+   "hash": "17c8065e3087c966ba3b39d6fbcf4a2075534623",
+   "pkgpath": "Data/level0",
+   "size": 9972,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/level0"
+  },
+  {
+   "compression": 8,
+   "hash": "571eb12d7aa87ae03ccce926de7eeb72c32917fb",
+   "pkgpath": "Data/level0.resS",
+   "size": 131232,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/level0.resS"
+  },
+  {
+   "compression": 8,
+   "hash": "02a03b5a2cdea8ba277aada46d1d70d1551702bf",
+   "pkgpath": "Data/sharedassets0.assets",
+   "size": 1088692,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/sharedassets0.assets"
+  },
+  {
+   "compression": 8,
+   "hash": "81439300537361181f9905b1c2761cfc540728e2",
+   "pkgpath": "Data/sharedassets0.assets.resS",
+   "size": 5262880,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Data/sharedassets0.assets.resS"
+  },
+  {
+   "compression": 8,
+   "hash": "8f59c553fa65e4c62b244f94275fdf50ef6a40e8",
+   "pkgpath": "bin/Player.elf",
+   "size": 22318968,
+   "src": "C:/Users/Player/Desktop/MagicLeap_Test/Temp/StagingArea/Player.elf",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "C:\\Users\\Player\\Downloads\\privatekey\\petertest.cert"
+    },
+    "taildata": {
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "ba269dd308cce37b750dd476bb600e9df3a0cf6d",
+   "xfrm_path": "C:/Users/Player/Desktop/MagicLeap_Test/.out/.cache/release_lumin_clang-3.8_aarch64/com.peter.testmesh-25430d9cae968e8d\\Player.elf-91f44daa17fa2f49",
+   "xfrm_size": 22319726
+  },
+  {
+   "compression": 8,
+   "hash": "5925de9f4d7b83c65d1fd7b25ced5f0bf8c27e73",
+   "pkgpath": "bin/libc++_shared.so",
+   "size": 976832,
+   "src": "C:/Users/Player/MagicLeap/mlsdk/v0.19.0/lumin/stl/libc++/lib/libc++_shared.so",
+   "xfrm_flags": {
+    "signed": {
+     "cert": "C:\\Users\\Player\\Downloads\\privatekey\\petertest.cert"
+    },
+    "taildata": {
+     "sbox": "USER",
+     "version": 3
+    }
+   },
+   "xfrm_hash": "aee07129e06386f37dfa99abc16ee441e757ea23",
+   "xfrm_path": "C:/Users/Player/Desktop/MagicLeap_Test/.out/.cache/release_lumin_clang-3.8_aarch64/com.peter.testmesh-25430d9cae968e8d\\libc++_shared.so-027ddac38d94c599",
+   "xfrm_size": 977590
+  },
+  {
+   "compression": 8,
+   "hash": "b6d987e9f0e6dfe2a632fef9008710d80c8caf9e",
+   "pkgpath": "manifest.xml",
+   "size": 541,
+   "src": "C:\\Users\\Player\\Desktop\\MagicLeap_Test\\Temp\\StagingArea\\manifest.xml",
+   "xfrm_flags": {
+    "manifest": {
+     "cert_hash": "91ac49b2afb12f4db3bc6fe9668ef9734336f458",
+     "developer_id": "9d2bb7c4-5a4f-49b0-8fdd-16bf67902dea"
+    }
+   },
+   "xfrm_hash": "e4b808a12f475411121bd6744d88f8b1b78833ea",
+   "xfrm_path": "C:/Users/Player/Desktop/MagicLeap_Test/.out/.cache/release_lumin_clang-3.8_aarch64/com.peter.testmesh-25430d9cae968e8d\\manifest.xml-91f44daa17fa2f49",
+   "xfrm_size": 553
+  }
+ ],
+ "pkgflags": {
+  "signed": {
+   "cert": "C:\\Users\\Player\\Downloads\\privatekey\\petertest.cert"
+  },
+  "taildata": {
+   "devcert": "C:\\Users\\Player\\Downloads\\privatekey\\petertest.cert",
+   "sbox": "USER",
+   "version": 3
+  }
+ }
+}

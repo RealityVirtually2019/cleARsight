@@ -1,0 +1,8 @@
+<manifest xmlns:ml="magicleap" ml:developer_id="9d2bb7c4-5a4f-49b0-8fdd-16bf67902dea" ml:package="com.peter.testmesh" ml:version_code="1" ml:version_name="">
+  <application ml:min_api_level="3" ml:sdk_version="1.0" ml:visible_name="MagicLeap_Test">
+    <uses-privilege ml:name="LowLatencyLightwear" />
+    <component ml:binary_name="bin/Player.elf" ml:name=".fullscreen" ml:type="Fullscreen" ml:visible_name="MagicLeap_Test">
+      <icon ml:model_folder="Icon/Model" ml:portal_folder="Icon/Portal" />
+    </component>
+  </application>
+</manifest>
