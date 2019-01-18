@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MagicLeap/Examples/Scenes/Meshing.unity
-    guid: 867506c3cbb29bc42a71d236fbd415c2
+    path: Assets/MagicLeap/Examples/Scenes/AudioCapture.unity
+    guid: ff47925fa63e39e438c7db235b18fff9
   m_configObjects: {}
