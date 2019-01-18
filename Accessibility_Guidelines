@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>Accessibility Guidelines for Low Vision</title>
+    <meta name="description" content="Visual Guidelines for Accessibility for Users with Low Vision">
+    <style>
+        html { font-size:100%; }
+        body { 
+        font: "helvetica", sans-serif; 
+        font-size: 12px;
+        color: #000000; 
+        background: #ffffff;}
+        a, a:visited { color: #0000EE; }
+        a:hover, a:focus, a:active { text-decoration: none; }
+        h1 { 
+        font-size: 28px;  
+        font-style: bold; }
+        h2 { 
+        font-size: 15px; }
+        p { }
+        em { 
+        font-style: italic; }
+        ul { list-style: square; margin: 1em 0 1em 0px; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+<h1>Accessibility Considerations</h1>
+<blockquote>
+<p class="p1"><span class="s1"><strong>25 million American adults report experiencing significant vision loss. -&nbsp;</strong></span></p>
+<span class="s1">National Center for Health Statistics, National Health Interview Survey, 2008, www.cdc.gov/nchs/nhis</span></blockquote>
+<h2>Key Needs for Low Vision</h2>
+<h3 class="p1"><span class="s1">Low vision concerns</span></h3>
+<ul class="ul1">
+<li class="li1"><span class="s1">Sensitivity to glare (scattering) </span></li>
+<li class="li1"><span class="s1">Diminished peripheral vision </span></li>
+<li class="li1"><span class="s1">Require higher lighting levels (tasks) </span></li>
+<li class="li1"><span class="s1">Pupil reacts slower (adaptation) </span></li>
+<li class="li1"><span class="s1">Light is dimmed and blurred </span></li>
+<li class="li2"><span class="s1">Change in color perception </span></li>
+</ul>
+<h3><span class="s2">Comforting and Supportive environments bolster independence and personal choice.</span></h3>
+<ul class="ul1">
+<li class="li1"><span class="s2">Know where they are and know where they are going</span></li>
+<li class="li1"><span class="s2">Reduces confusion and frustration</span></li>
+<li class="li1"><span class="s2">Well lit:</span></li>
+<ul class="ul1">
+<li class="li1"><span class="s2">easy to navigate spaces</span></li>
+<li class="li2"><span class="s2">accommodate use</span></li>
+</ul>
+</ul>
+<h3 class="p1"><span class="s1"><strong>Principles that organize the design</strong></span></h3>
+<ul class="ul1">
+<li class="li1"><span class="s2">Clarity of spatial organization (natural mapping)</span></li>
+<li class="li1"><span class="s2">Landmarks that provides as many hardwired cues so they are self explanatory and assist in navigation and orientation</span></li>
+<li class="li2"><span class="s2">Multi-sensory cues that lead the way</span></li>
+</ul>
+<h3><span class="s2">Yellowing of the Lens</span></h3>
+<ul class="ol1">
+<li class="li1"><span class="s2">That lens is so transparent that it is virtually invisible against the light gray background.</span></li>
+<li class="li1"><span class="s2">Lenses tend to darken - become less transparent - over time. This means an older lens will tend to transmit less of the incident light than will a younger lens. </span></li>
+<li class="li2"><span class="s2">The loss of transparency depends upon genetics and light exposure, as well as age.</span></li>
+</ul>
+<h2>Massachusetts Commision for the Blind</h2>
+<h3>Low Vision 101</h3>
+<ul class="ul1">
+<li class="li1"><span class="s2">Most people develop low vision due to different eye diseases and/or health conditions.&nbsp;</span></li>
+<li class="li2"><span class="s2">Vision once lost can not usually be restored but there are services and equipment which can help individuals make better use of their remaining vision.</span></li>
+</ul>
+<h3>The "C"s of Vision Loss</h3>
+<ul class="ul1">
+<li class="li1"><span class="s2"><strong>Caution</strong>: Adapt environments for safer movement</span></li>
+<li class="li1"><span class="s2"><strong>Courtesy</strong>: Always identify yourself when working with an Individual</span></li>
+<li class="li1"><span class="s2"><strong>Communication</strong>: Use detailed directions</span></li>
+<li class="li1"><span class="s2"><strong>Consistency</strong>: Keep objects and rooms consistent</span></li>
+<li class="li2"><span class="s2"><strong>Contrast, Contrast, Contrast</strong></span></li>
+</ul>
+<h2>World Wide Web Consortium Accessibility Guidelines</h2>
+<p>via&nbsp;<a href="https://www.w3.org/WAI/fundamentals/accessibility-principles/">https://www.w3.org/WAI/fundamentals/accessibility-principles/</a></p>
+<h3 id="alternatives">Text alternatives for non-text content</h3>
+<p>Text alternatives are equivalents for non-text content. Examples include:</p>
+<ul>
+<li>Short equivalents for images, including icons, buttons, and graphics;</li>
+<li>Description of data represented on charts, diagrams, and illustrations;</li>
+<li>Brief descriptions of non-text content such as audio and video files;</li>
+<li>Labels for form controls, input, and other user interface components</li>
+</ul>
+<h3>Captions and other alternatives for multimedia</h3>
+<p>People who cannot hear audio or see video need alternatives. Examples include:</p>
+<ul>
+<li>Text transcripts and captions for audio content, such as recordings of a radio interview;</li>
+<li>Audio descriptions, which are narrations to describe important visual details in a video;</li>
+<li>Sign language interpretation of audio content, including relevant auditory experiences.</li>
+</ul>
+<h3 id="distinguishable">Content is easier to see and hear</h3>
+<p>Distinguishable content is easier to see and hear. Such content includes:</p>
+<ul>
+<li>Color is not used as the only way of conveying information or identifying content;</li>
+<li>Default foreground and background color combinations provide sufficient contrast;</li>
+<li>Users can pause, stop, or adjust the volume of audio that is played;</li>
+<li>Background audio is low or can be turned off, to avoid interference or distraction.</li>
+</ul>
+</body>
+</html>
