@@ -49,6 +49,10 @@ namespace MagicLeap
         private Camera _camera;
         #endregion
 
+        #region Public Variables
+        public GameObject raycastHit;
+        #endregion
+
         #region Unity Methods
         /// <summary>
         /// Initializes component data and starts MLInput.
@@ -153,7 +157,21 @@ namespace MagicLeap
         {
             if (_controllerConnectionHandler.IsControllerValid(controllerId))
             {
-               
+                raycastHit.SetActive(true);
+            }
+        }
+
+        /// <summary>
+        /// Handles the event for trigger down. Throws a ball in the direction of
+        /// the camera's forward vector.
+        /// </summary>
+        /// <param name="controllerId">The id of the controller.</param>
+        /// <param name="button">The button that is being released.</param>
+        private void OnTriggerUp(byte controllerId, float value)
+        {
+            if (_controllerConnectionHandler.IsControllerValid(controllerId))
+            {
+                raycastHit.SetActive(false);
             }
         }
 
