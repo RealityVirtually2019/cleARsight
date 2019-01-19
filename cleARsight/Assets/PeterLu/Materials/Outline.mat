@@ -60,8 +60,8 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EmissionMultiplier: 1
-    - _FalloffDistance: 5
-    - _FalloffPower: 2.88
+    - _FalloffDistance: 1.84
+    - _FalloffPower: 5
     - _FalloffThreshould: 1.24
     - _GlitchDensity: 0
     - _GlitchPeriod: 0
