@@ -2,7 +2,7 @@
 
 // Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
-Shader "PeterLu/OutlineShaderHorizontal"
+Shader "PeterLu/SimpleOutline"
 {
 	Properties
 	{
@@ -44,8 +44,7 @@ Shader "PeterLu/OutlineShaderHorizontal"
 		//This pass renderes the outline and it renders after the above pass by extruding all the faces and cull the front side
 		Pass
 		{
-			Cull Front
-			ZWrite On 
+			ZWrite Off 
             ColorMask rgb 
             Blend SrcAlpha OneMinusSrcAlpha
 			Tags { "LightMode" = "Always" }
@@ -61,8 +60,6 @@ Shader "PeterLu/OutlineShaderHorizontal"
 			{
 				float4 vertex : POSITION;
 				float3 normal : NORMAL;
-				float3 tangent : TANGENT;
-				float4 color : COLOR;
 			};
 
 			struct v2f
@@ -70,20 +67,12 @@ Shader "PeterLu/OutlineShaderHorizontal"
 				UNITY_FOG_COORDS(1)
 				float4 vertex : SV_POSITION;
 				float4 color : COLOR;
-				half3 worldNormal : TEXCOORD0;
-				float3 worldPos : TEXCOORD1;
 			};
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
+
 			fixed4 _OutlineColor;
-
-			float _FalloffDistance;
-			float _FalloffPower;
-
-			uniform Vector camPos; 
-
-			float _HorizontalNormalRange;
 			
 			float _OutlineStrength;
 
@@ -99,16 +88,13 @@ Shader "PeterLu/OutlineShaderHorizontal"
 				
 				//extrude by the offset
 				o.vertex.xyz += offset * _OutlineStrength;
-				o.worldNormal = UnityObjectToWorldNormal(v.normal);
-
-				o.worldPos = mul (unity_ObjectToWorld, v.vertex);
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				return o;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				fixed4 col = _OutlineColor * pow(saturate(_FalloffDistance / distance(camPos, i.worldPos)), _FalloffPower);
+				fixed4 col = _OutlineColor;
 				
 				UNITY_APPLY_FOG(i.fogCoord, col);
 				return col;
@@ -118,9 +104,8 @@ Shader "PeterLu/OutlineShaderHorizontal"
 
 		
 		Pass {
-            Name "GrabOffset"
             Cull Back
-            ZWrite Off
+            ZWrite On
         	Blend Off
                
             CGPROGRAM
@@ -147,7 +132,7 @@ Shader "PeterLu/OutlineShaderHorizontal"
 			float _FalloffDistance;
 			float _FalloffPower;
 
-			uniform Vector camPos; 
+			uniform float4 _CamPos; 
 
 			float4 _HoloDirection;
      
@@ -180,11 +165,11 @@ Shader "PeterLu/OutlineShaderHorizontal"
 				
 				float finalP = i.worldPos.x * _HoloDirection.x + i.worldPos.y * _HoloDirection.y + i.worldPos.z * _HoloDirection.z;
 				
-				if(i.normal.y > _HorizontalNormalRange && i.worldPos.y > 0.1)
+				if(i.normal.y > _HorizontalNormalRange && i.worldPos.y > -1)
 				{
 					if(frac((finalP + _Time.y/_Speed) * _HoloValue) > _HoloDistance)
 					{
-						col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayHorizontal * pow(saturate(_FalloffDistance / distance(camPos, i.worldPos)), _FalloffPower);
+						col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayHorizontal * pow(saturate(_FalloffDistance / distance(_CamPos, i.worldPos)), _FalloffPower);
 					}
 					else
 					{
@@ -195,7 +180,7 @@ Shader "PeterLu/OutlineShaderHorizontal"
 				{
 					if(frac((finalP + _Time.y/_Speed) * _HoloValue) > _HoloDistance)
 					{
-						col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayVertical * pow(saturate(_FalloffDistance / distance(camPos, i.worldPos)), _FalloffPower);
+						col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayVertical * pow(saturate(_FalloffDistance / distance(_CamPos, i.worldPos)), _FalloffPower);
 					}
 					else
 					{

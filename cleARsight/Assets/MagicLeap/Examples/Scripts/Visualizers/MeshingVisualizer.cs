@@ -186,7 +186,10 @@ namespace MagicLeap
             {
                 UpdateRenderer(_mlSpatialMapper.meshIdToGameObjectMap[meshId].GetComponent<MeshRenderer>());
 
-                
+                Mesh mesh = _mlSpatialMapper.meshIdToGameObjectMap[meshId].GetComponentInChildren< MeshFilter>().mesh;
+
+                mesh.RecalculateNormals(120);
+
             }
         }
         #endregion
