@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Outline
-  m_Shader: {fileID: 4800000, guid: 7975457374637674580644a4916bf28f, type: 3}
+  m_Name: Hologram
+  m_Shader: {fileID: 4800000, guid: 409283ac51140dc48b9387792ce23ecc, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -63,15 +63,15 @@ Material:
     - _FalloffDistance: 5
     - _FalloffPower: 2.88
     - _FalloffThreshould: 1.24
-    - _GlitchDensity: 0
-    - _GlitchPeriod: 0
-    - _GlitchStrength: 0
+    - _GlitchDensity: 0.69
+    - _GlitchPeriod: 1.75
+    - _GlitchStrength: 0.0409
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HoloDistance: 0.589
-    - _HoloValue: 7.86
-    - _HorizontalNormalRange: 0.66
+    - _HoloDistance: 0.755
+    - _HoloValue: 10
+    - _HorizontalNormalRange: 0.36
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -79,20 +79,19 @@ Material:
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 10
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.1554043, g: 0.14684944, b: 0.5660378, a: 0.7921569}
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GlitchDirection: {r: 0, g: 1, b: 0, a: 0}
-    - _HoloColor: {r: 1, g: 1, b: 1, a: 1}
-    - _HoloDirection: {r: 1, g: 0, b: 1, a: 0}
+    - _GlitchDirection: {r: 1, g: 1, b: 0, a: 0}
+    - _HoloColor: {r: 0, g: 0.937675, b: 1, a: 1}
+    - _HoloDirection: {r: 0, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 1, g: 0.90588236, b: 0, a: 1}
     - _OutlineColorHorizontal: {r: 0.5999013, g: 1, b: 0, a: 1}
     - _OutlineColorVertical: {r: 1, g: 0, b: 0, a: 1}
     - _Overlay: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
-    - _OverlayHorizontal: {r: 0.30982792, g: 0.5754717, b: 0.24701852, a: 1}
+    - _OverlayHorizontal: {r: 0.59608555, g: 0, b: 1, a: 1}
     - _OverlayVertical: {r: 0, g: 0, b: 0, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}

@@ -16,6 +16,19 @@
 		_OutlineStrength("Outline Strength", Range(0.01, 0.3)) = 0.01
 
 		_HorizontalNormalRange("Horizontal Range", float) = 0
+
+		_FalloffDistance("FalloffDistance", Range(0, 10)) = 5
+
+		[Space(50)]
+		[Header(Holo Section)]
+		_Color ("Base Color", Color) = (1,1,1,1)
+		_HoloColor("Holo Color", Color) = (1,1,1,1)
+		_HoloValue ("Holo Value", Range(0, 10)) = 1
+		_HoloDistance ("Holo Distance", Range(0,1)) = 0.5
+		_HoloDirection("Holo Direction", Vector) = (0,1,0,0)
+		_EmissionMultiplier("Emission Multiplier", Float) = 1
+		_Speed("Speed", Float) = 1
+
 	}
 	SubShader
 	{
@@ -117,12 +130,18 @@
 			float4 _OverlayVertical;
 
 			float _HorizontalNormalRange;
+			float _HoloValue;
+			float _HoloDistance;
+			float _Speed;
+
+			float4 _HoloDirection;
      
             struct v2f {
                 float4 pos : POSITION;
                 float2 texcoord : TEXCOORD0;
                 float4 GrabUV : TEXCOORD1;
                 float3 normal : NORMAL;
+				float3 worldPos : TEXCOORD2;
             };
      
 			
@@ -134,6 +153,7 @@
                 o.texcoord = v.texcoord;
                 o.normal = UnityObjectToWorldNormal(v.normal);
                 o.GrabUV = ComputeGrabScreenPos(o.pos);
+				o.worldPos = mul (unity_ObjectToWorld, v.vertex);
                    
                 return o;
             }
@@ -143,13 +163,29 @@
             {
 				fixed4 col;
 				
-				if(i.normal.y > _HorizontalNormalRange)
+				float finalP = i.worldPos.x * _HoloDirection.x + i.worldPos.y * _HoloDirection.y + i.worldPos.z * _HoloDirection.z;
+				
+				if(i.normal.y > _HorizontalNormalRange && i.worldPos.y > 0.1)
 				{
-					 col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayHorizontal;
+					if(frac((finalP + _Time.y/_Speed) * _HoloValue) > _HoloDistance)
+					{
+						col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayHorizontal;
+					}
+					else
+					{
+						col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV));
+					}
 				}
-				else
+				else if(i.normal.y < _HorizontalNormalRange && i.worldPos.y > 0.1)
 				{
-					col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayVertical;
+					if(frac((finalP + _Time.y/_Speed) * _HoloValue) > _HoloDistance)
+					{
+						col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayVertical;
+					}
+					else
+					{
+						col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV));
+					}
 				}
 				
 				
