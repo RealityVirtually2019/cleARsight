@@ -29,7 +29,7 @@ namespace MagicLeap
         private MLSpatialMapper _mlSpatialMapper;
 
         [SerializeField, Tooltip("Visualizer for the meshing results.")]
-        private MeshingVisualizer _meshingVisualizer;
+        private cleARsightVisualizer _meshingVisualizer;
 
 
         [SerializeField, Space, Tooltip("Flag specifying if mesh extents are bounded.")]
@@ -39,7 +39,7 @@ namespace MagicLeap
         [SerializeField, Space, Tooltip("ControllerConnectionHandler reference.")]
         private ControllerConnectionHandler _controllerConnectionHandler;
 
-        private MeshingVisualizer.RenderMode _renderMode = MeshingVisualizer.RenderMode.Wireframe;
+        private cleARsightVisualizer.RenderMode _renderMode = cleARsightVisualizer.RenderMode.Outline;
         private int _renderModeCount;
 
         private static readonly Vector3 _boundedExtentsSize = new Vector3(2.0f, 2.0f, 2.0f);
@@ -134,7 +134,7 @@ namespace MagicLeap
             {
                 if (button == MLInputControllerButton.Bumper)
                 {
-                    _renderMode = (MeshingVisualizer.RenderMode)((int)(_renderMode + 1) % _renderModeCount);
+                    _renderMode = (cleARsightVisualizer.RenderMode)((int)(_renderMode + 1) % _renderModeCount);
                     _meshingVisualizer.SetRenderers(_renderMode);
                 }
                 else if (button == MLInputControllerButton.HomeTap)

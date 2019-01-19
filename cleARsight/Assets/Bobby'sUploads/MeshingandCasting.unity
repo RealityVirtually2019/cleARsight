@@ -287,7 +287,9 @@ GameObject:
   m_Component:
   - component: {fileID: 425187554}
   - component: {fileID: 425187556}
+  - component: {fileID: 425187558}
   - component: {fileID: 425187555}
+  - component: {fileID: 425187557}
   m_Layer: 0
   m_Name: cleARsightMeshing
   m_TagString: Untagged
@@ -315,7 +317,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 425187553}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5cbbc5affe6f36e4c9babe9002ec5e21, type: 3}
   m_Name: 
@@ -336,10 +338,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mlSpatialMapper: {fileID: 1301693067}
-  _meshingVisualizer: {fileID: 425187555}
+  _meshingVisualizer: {fileID: 425187557}
   _bounded: 0
   _controllerConnectionHandler: {fileID: 1747550480}
   raycastHit: {fileID: 1419141723}
+--- !u!114 &425187557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 425187553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17bd7c977cbcfd541a6122c13727a3dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mlSpatialMapper: {fileID: 1301693067}
+  _BothMaterial: {fileID: 2100000, guid: c0a86ea0f3edd1a4383bf93ef7b4df94, type: 2}
+  _OutlineMaterial: {fileID: 2100000, guid: c9a1fc3695f954675a170a24e9cfdeb7, type: 3}
+  _HoriPlaneMaterial: {fileID: 2100000, guid: 6a19fdeea2eb24612a1957cb448364fc, type: 2}
+--- !u!114 &425187558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 425187553}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d70659c3b5a57a4ab4350afa3cd6279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mlSpatialMapper: {fileID: 1301693067}
+  _meshingVisualizer: {fileID: 425187555}
+  _visualBounds: {fileID: 333912032}
+  _bounded: 0
+  _statusLabel: {fileID: 2066349677}
+  _shootingPrefab: {fileID: 1768872223544792, guid: 0b46e96b48f596a4abe7013197e2fe8f,
+    type: 2}
+  _controllerConnectionHandler: {fileID: 1747550480}
 --- !u!4 &543799981 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4486541323493368, guid: b6af97b52b3429641aa904690975fa80,
