@@ -22,7 +22,7 @@ Shader "PeterLu/SimpleOutline"
 		_HorizontalNormalRange("Horizontal Range", float) = 0
 
 		_FalloffDistance("FalloffDistance", Range(0, 10)) = 5
-		_FalloffPower("Falloff Power", Range(0,5)) = 1
+		_FalloffPower("Falloff Power", Range(0,15)) = 1
 
 		[Space(50)]
 		[Header(Holo Section)]
@@ -37,6 +37,8 @@ Shader "PeterLu/SimpleOutline"
 	}
 	SubShader
 	{
+		
+
 		Tags { "RenderType"="Transparent" "IgnoreProjector" = "True" "Queue"="Transparent"}
 		LOD 100
 		GrabPass {"_GrabTexture"}
@@ -67,6 +69,7 @@ Shader "PeterLu/SimpleOutline"
 				UNITY_FOG_COORDS(1)
 				float4 vertex : SV_POSITION;
 				float4 color : COLOR;
+				float3 worldPos : TEXCOORD0;
 			};
 
 			sampler2D _MainTex;
@@ -74,19 +77,25 @@ Shader "PeterLu/SimpleOutline"
 
 			fixed4 _OutlineColor;
 			
+			float _FalloffDistance;
+			float _FalloffPower;
+			
 			float _OutlineStrength;
+
+			uniform float4 _CamPos; 
+			uniform float worldGroundHeight;
 
 			v2f vert (appdata v)
 			{
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 
-			
+				o.worldPos = mul (unity_ObjectToWorld, v.vertex);
 				//find the offset according to normal direction
 				float3 norm   = normalize(mul ((float3x3)UNITY_MATRIX_IT_MV, v.normal));
 				float3 offset = TransformViewToProjection(norm.xyz);
 				
-				//extrude by the offset
+				//extrude by the offsets
 				o.vertex.xyz += offset * _OutlineStrength;
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				return o;
@@ -94,8 +103,12 @@ Shader "PeterLu/SimpleOutline"
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				fixed4 col = _OutlineColor;
-				
+				fixed4 col;
+				if(i.worldPos.y > -1)
+				{
+					col = _OutlineColor * pow(saturate(_FalloffDistance / distance(_CamPos, i.worldPos)), _FalloffPower);
+				}
+
 				UNITY_APPLY_FOG(i.fogCoord, col);
 				return col;
 			}
@@ -131,8 +144,9 @@ Shader "PeterLu/SimpleOutline"
 			float _Speed;
 			float _FalloffDistance;
 			float _FalloffPower;
-
 			uniform float4 _CamPos; 
+			uniform float worldGroundHeight;
+			
 
 			float4 _HoloDirection;
      

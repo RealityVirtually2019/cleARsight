@@ -60,8 +60,8 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EmissionMultiplier: 1
-    - _FalloffDistance: 1.2
-    - _FalloffPower: 5
+    - _FalloffDistance: 2.88
+    - _FalloffPower: 15
     - _FalloffThreshould: 1.24
     - _FloatTime: 1
     - _GlitchDensity: 0
@@ -92,7 +92,7 @@ Material:
     - _GlitchDirection: {r: 0, g: 1, b: 0, a: 0}
     - _HoloColor: {r: 1, g: 1, b: 1, a: 1}
     - _HoloDirection: {r: 1, g: 0, b: 1, a: 0}
-    - _OutlineColor: {r: 1, g: 0.90588236, b: 0, a: 1}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColorHorizontal: {r: 0.5999013, g: 1, b: 0, a: 1}
     - _OutlineColorVertical: {r: 1, g: 0, b: 0, a: 1}
     - _Overlay: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
