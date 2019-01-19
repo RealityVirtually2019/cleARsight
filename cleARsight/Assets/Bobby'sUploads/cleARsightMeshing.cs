@@ -84,6 +84,7 @@ namespace MagicLeap
 
             MLInput.OnControllerButtonDown += OnButtonDown;
             MLInput.OnTriggerDown += OnTriggerDown;
+            MLInput.OnTriggerUp += OnTriggerUp;
             MLInput.OnControllerTouchpadGestureStart += OnTouchpadGestureStart;
             MagicLeapDevice.RegisterOnHeadTrackingMapEvent(OnHeadTrackingMapEvent);
         }
@@ -116,6 +117,7 @@ namespace MagicLeap
             MagicLeapDevice.UnregisterOnHeadTrackingMapEvent(OnHeadTrackingMapEvent);
             MLInput.OnControllerTouchpadGestureStart -= OnTouchpadGestureStart;
             MLInput.OnTriggerDown -= OnTriggerDown;
+            MLInput.OnTriggerUp -= OnTriggerUp;
             MLInput.OnControllerButtonDown -= OnButtonDown;
         }
         #endregion
