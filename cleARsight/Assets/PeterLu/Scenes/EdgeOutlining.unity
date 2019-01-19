@@ -684,7 +684,7 @@ MonoBehaviour:
     m_Bits: 256
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 1
-  antialiasingMode: 3
+  antialiasingMode: 0
   temporalAntialiasing:
     jitterSpread: 0.75
     sharpness: 0.25
@@ -891,6 +891,7 @@ GameObject:
   - component: {fileID: 1154797113}
   - component: {fileID: 1154797115}
   - component: {fileID: 1154797114}
+  - component: {fileID: 1154797116}
   m_Layer: 0
   m_Name: MeshingExample
   m_TagString: Untagged
@@ -946,6 +947,30 @@ MonoBehaviour:
   _shootingPrefab: {fileID: 1768872223544792, guid: 0b46e96b48f596a4abe7013197e2fe8f,
     type: 2}
   _controllerConnectionHandler: {fileID: 445776562}
+--- !u!114 &1154797116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1154797112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6458798806d61cb4cb64e14fc3ecbdc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialVoiceOver: {fileID: 0}
+  standbyModeActivatedAudio: {fileID: 0}
+  activeModeActivatedAudio: {fileID: 0}
+  triggerPressedVO: {fileID: 0}
+  bumperPressedVO: {fileID: 0}
+  swipeUpVO: {fileID: 0}
+  swipeDownVO: {fileID: 0}
+  homePressedVO: {fileID: 0}
+  triggerLabel: {fileID: 0}
+  bumperLabel: {fileID: 0}
+  homeLabel: {fileID: 0}
+  swipeUpLabel: {fileID: 0}
+  swipeDownLabel: {fileID: 0}
 --- !u!1 &1377191571
 GameObject:
   m_ObjectHideFlags: 0
