@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
     [Header("Label Gameobjects")]
     public GameObject triggerLabel;
     public GameObject bumperLabel;
-    public GameObject homeLabel;
     public GameObject swipeUpLabel;
     public GameObject swipeDownLabel;
 
