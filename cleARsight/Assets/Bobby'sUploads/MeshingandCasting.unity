@@ -258,9 +258,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mlSpatialMapper: {fileID: 1301693067}
-  _BothMaterial: {fileID: 2100000, guid: 5aafff486c65a9b49b010747ede735b8, type: 2}
-  _OutlineMaterial: {fileID: 2100000, guid: 8b92e1026f8c27448bb448f6f5d4fe88, type: 2}
-  _HoriPlaneMaterial: {fileID: 2100000, guid: 6a19fdeea2eb24612a1957cb448364fc, type: 2}
+  _BothMaterial: {fileID: 2100000, guid: a4bb844db58d2404c9f9d1a298a4a1cc, type: 2}
+  _OutlineMaterial: {fileID: 2100000, guid: 18c2260f167c4e14fa4d46f8a846e801, type: 2}
+  _HoriPlaneMaterial: {fileID: 2100000, guid: 7aae88e0564276d4387adfd78402b340, type: 2}
 --- !u!4 &543799981 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4486541323493368, guid: b6af97b52b3429641aa904690975fa80,
@@ -996,7 +996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _controllerConnectionHandler: {fileID: 548439766}
   raycaster: {fileID: 1419141724}
-  distance: 0
+  distance: 1
 --- !u!1 &1462129510
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,7 +1131,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1532296883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03c043b6b64024149b9d30502bcd975a, type: 3}
+  m_Script: {fileID: 11500000, guid: edb6a4fb0dd792748815a66294802a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!20 &1532296888

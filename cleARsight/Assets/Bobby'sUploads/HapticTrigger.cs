@@ -31,9 +31,11 @@ namespace MagicLeap
             if (soundTrigger.time < 0.1f && soundTrigger.isPlaying)
             {
 
-                MLInputControllerFeedbackIntensity intensity = (MLInputControllerFeedbackIntensity)((int)(3.0f / distance));
+                MLInputControllerFeedbackIntensity intensity = (MLInputControllerFeedbackIntensity)((int)(distance * 0.3f));
                 controller.StartFeedbackPatternVibe(MLInputControllerFeedbackPatternVibe.Buzz, intensity);
             }
+            //MLInputControllerFeedbackIntensity intensity = (MLInputControllerFeedbackIntensity)((int)(distance * 0.3f));
+            //controller.StartFeedbackPatternVibe(MLInputControllerFeedbackPatternVibe.Buzz, intensity);
         }
     }
 }
