@@ -17,7 +17,7 @@ Shader "PeterLu/SimpleOutline"
 		[Header(Outline Colors)]
 		_OutlineColor("Outline Color", Color) = (0,0,0,0)
 
-		_OutlineStrength("Outline Strength", Range(0.01, 0.3)) = 0.01
+		_OutlineStrength("Outline Strength", Range(0.001, 0.1)) = 0.01
 
 		_HorizontalNormalRange("Horizontal Range", float) = 0
 

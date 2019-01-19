@@ -60,7 +60,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EmissionMultiplier: 1
-    - _FalloffDistance: 1.78
+    - _FalloffDistance: 1.2
     - _FalloffPower: 5
     - _FalloffThreshould: 1.24
     - _FloatTime: 1
@@ -77,7 +77,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Outline: 0.1
-    - _OutlineStrength: 0.01
+    - _OutlineStrength: 0.0084
     - _Parallax: 0.02
     - _Smoothing: 0
     - _SmoothnessTextureChannel: 0
