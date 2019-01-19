@@ -18,6 +18,7 @@
 		_HorizontalNormalRange("Horizontal Range", float) = 0
 
 		_FalloffDistance("FalloffDistance", Range(0, 10)) = 5
+		_FalloffPower("Falloff Power", Range(0,5)) = 1
 
 		[Space(50)]
 		[Header(Holo Section)]
@@ -64,18 +65,21 @@
 				float4 vertex : SV_POSITION;
 				float4 color : COLOR;
 				half3 worldNormal : TEXCOORD0;
+				float3 worldPos : TEXCOORD1;
 			};
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 			fixed4 _OutlineColor;
 
+			float _FalloffDistance;
+			float _FalloffPower;
+
+			uniform Vector camPos; 
+
 			float _HorizontalNormalRange;
 			
 			float _OutlineStrength;
-			float _FalloffThreshould;
-			float _FalloffPower;
-			uniform Vector camPos; 
 
 			v2f vert (appdata v)
 			{
@@ -90,14 +94,14 @@
 				o.vertex.xyz += offset * _OutlineStrength;
 				o.worldNormal = UnityObjectToWorldNormal(v.normal);
 
-
+				o.worldPos = mul (unity_ObjectToWorld, v.vertex);
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				return o;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				fixed4 col = _OutlineColor;
+				fixed4 col = _OutlineColor * pow(saturate(_FalloffDistance / distance(camPos, i.worldPos)), _FalloffPower);
 				
 				UNITY_APPLY_FOG(i.fogCoord, col);
 				return col;
@@ -133,6 +137,10 @@
 			float _HoloValue;
 			float _HoloDistance;
 			float _Speed;
+			float _FalloffDistance;
+			float _FalloffPower;
+
+			uniform Vector camPos; 
 
 			float4 _HoloDirection;
      
@@ -169,7 +177,7 @@
 				{
 					if(frac((finalP + _Time.y/_Speed) * _HoloValue) > _HoloDistance)
 					{
-						col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayHorizontal;
+						col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayHorizontal * pow(saturate(_FalloffDistance / distance(camPos, i.worldPos)), _FalloffPower);
 					}
 					else
 					{
@@ -180,7 +188,7 @@
 				{
 					if(frac((finalP + _Time.y/_Speed) * _HoloValue) > _HoloDistance)
 					{
-						col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayVertical;
+						col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayVertical * pow(saturate(_FalloffDistance / distance(camPos, i.worldPos)), _FalloffPower);
 					}
 					else
 					{
