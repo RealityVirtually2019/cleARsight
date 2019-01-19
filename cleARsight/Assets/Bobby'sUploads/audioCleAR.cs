@@ -1,8 +1,4 @@
-﻿
-// ---------------------------------------------------------------------
-// %BANNER_END%
-
-using System.Linq;
+﻿using System.Linq;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +12,7 @@ namespace MagicLeap
     /// through an audio source attached to the parrot in the scene.
     /// </summary>
     [RequireComponent(typeof(PrivilegeRequester))]
-    public class cleARsightAudio : MonoBehaviour
+    public class audioCleAR : MonoBehaviour
     {
 
         #region Private Variables
@@ -26,11 +22,12 @@ namespace MagicLeap
         [SerializeField, Tooltip("The audio source that should capture the microphone input.")]
         private AudioSource _inputAudioSource;
 
-        [SerializeField, Tooltip("The memo game object.")]
-        private GameObject memoPrefab;
+        [SerializeField, Tooltip("The audio source that should replay the captured audio.")]
+        private AudioSource _playbackAudioSource;
 
-        [SerializeField, Tooltip("The controller location where memo is spawned.")]
-        private Transform controller;
+        [SerializeField, Tooltip("The text to display the recording status.")]
+        private Text _statusLabel;
+
 
         private PrivilegeRequester _privilegeRequester;
 
@@ -40,7 +37,9 @@ namespace MagicLeap
 
         private float _audioMaxSample = 0;
         private float[] _audioSamples = new float[128];
-        
+
+        private bool _isAudioDetected = false;
+        private float _audioLastDetectionTime = 0;
         private float _audioDetectionStart = 0;
         private float _audioDetectionEnd = 0;
 
@@ -51,7 +50,6 @@ namespace MagicLeap
         private const float AUDIO_CLIP_FALLOFF_SECONDS = 0.5f;
         private const float ROTATION_DAMPING = 100;
 
-        
         #endregion
 
         #region Unity Methods
@@ -60,6 +58,13 @@ namespace MagicLeap
             if (_inputAudioSource == null)
             {
                 Debug.LogError("Error: AudioCaptureExample._inputAudioSource is not set, disabling script.");
+                enabled = false;
+                return;
+            }
+
+            if (_playbackAudioSource == null)
+            {
+                Debug.LogError("Error: AudioCaptureExample._playbackAudioSource is not set, disabling script.");
                 enabled = false;
                 return;
             }
@@ -76,18 +81,12 @@ namespace MagicLeap
 
             _privilegeRequester.OnPrivilegesDone += HandleOnPrivilegesDone;
             MLInput.OnControllerButtonDown += HandleOnButtonDown;
-            MLInput.OnControllerTouchpadGestureContinue += HandleOnTouchpadGestureEnd;
-            MLInput.OnControllerTouchpadGestureStart += HandleOnTouchpadGestureStart;
         }
 
         void OnDestroy()
         {
             _privilegeRequester.OnPrivilegesDone -= HandleOnPrivilegesDone;
             MLInput.OnControllerButtonDown -= HandleOnButtonDown;
-
-
-            MLInput.OnControllerTouchpadGestureContinue -= HandleOnTouchpadGestureEnd;
-            MLInput.OnControllerTouchpadGestureStart -= HandleOnTouchpadGestureStart;
 
             StopCapture();
         }
@@ -128,6 +127,16 @@ namespace MagicLeap
             _inputAudioSource.clip = Microphone.Start(_deviceMicrophone, true, AUDIO_CLIP_LENGTH_SECONDS, AUDIO_CLIP_FREQUENCY_HERTZ);
             _inputAudioSource.loop = true;
 
+            // Delay to produce realtime playback effect.
+            while (!(Microphone.GetPosition(_deviceMicrophone) > 0)) { }
+            _inputAudioSource.Play();
+
+
+            _playbackAudioSource.pitch = 1;
+            _playbackAudioSource.clip = _inputAudioSource.clip;
+            _playbackAudioSource.loop = true;
+            _playbackAudioSource.Play();
+
         }
 
         private void StopCapture()
@@ -141,19 +150,29 @@ namespace MagicLeap
             {
                 Microphone.End(_deviceMicrophone);
             }
-            
+
+            // Stop audio playback source and reset settings.
+            _playbackAudioSource.Stop();
+            _playbackAudioSource.loop = false;
+            _playbackAudioSource.clip = null;
+
         }
 
-        private void MakeMemo()
+
+        private void DetectAudio()
         {
-            var memo = Instantiate(memoPrefab, controller.transform.position, Quaternion.identity);
-            var memosound = memo.GetComponent<AudioSource>();
-            //memosound.clip = CreateAudioClip(_inputAudioSource.clip, _audioDetectionStart, _audioDetectionEnd);
-            
+            // Create the playback clip.
+            _playbackAudioSource.clip = CreateAudioClip(_inputAudioSource.clip, _audioDetectionStart, _audioDetectionEnd);
+            if (_playbackAudioSource.clip != null)
+            {
+                _playbackAudioSource.Play();
+            }
+
+            // Reset and allow for new captured speech.
+            _isAudioDetected = false;
             _audioDetectionStart = 0;
             _audioDetectionEnd = 0;
         }
-
 
         /// <summary>
         /// Creates a new audio clip within the start and stop range.
@@ -170,7 +189,7 @@ namespace MagicLeap
                 return null;
             }
 
-            AudioClip audioClip = AudioClip.Create("Memo", length, 1, clip.frequency, false);
+            AudioClip audioClip = AudioClip.Create("Parrot_Voice", length, 1, clip.frequency, false);
 
             float[] data = new float[length];
             clip.GetData(data, (int)(clip.frequency * start));
@@ -179,7 +198,6 @@ namespace MagicLeap
             return audioClip;
         }
         #endregion
-
         #region Event Handlers
         /// <summary>
         /// Responds to privilege requester result.
@@ -201,7 +219,7 @@ namespace MagicLeap
 
             _canCapture = true;
             Debug.Log("Succeeded in requesting all privileges");
-            
+
         }
 
         private void HandleOnButtonDown(byte controllerId, MLInputControllerButton button)
@@ -210,53 +228,16 @@ namespace MagicLeap
             {
                 if (_canCapture && button == MLInputControllerButton.Bumper)
                 {
+
                     // Stop & Start to clear the previous mode.
                     if (_isCapturing)
                     {
-                        _audioDetectionEnd = _inputAudioSource.time;
-                        MakeMemo();
                         StopCapture();
                     }
                     else
                     {
                         StartCapture();
                     }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Update swiping counters to update textures if swipe left or right.
-        /// </summary>
-        /// <param name="controllerId">The id of the controller.</param>
-        /// <param name="gesture">Touchpad gesture getting done.</param>
-        private void HandleOnTouchpadGestureStart(byte controllerId, MLInputControllerTouchpadGesture gesture)
-        {
-            if (_controllerConnectionHandler.IsControllerValid(controllerId) && gesture.Type == MLInputControllerTouchpadGestureType.Swipe)
-            {
-                if (gesture.Direction == MLInputControllerTouchpadGestureDirection.Up)
-                {
-                }
-                else if (gesture.Direction == MLInputControllerTouchpadGestureDirection.Left)
-                {
-                }
-            }
-        }
-
-        /// <summary>
-        /// Update swiping counters to update textures if swipe left or right.
-        /// </summary>
-        /// <param name="controllerId">The id of the controller.</param>
-        /// <param name="gesture">Touchpad gesture getting done.</param>
-        private void HandleOnTouchpadGestureEnd(byte controllerId, MLInputControllerTouchpadGesture gesture)
-        {
-            if (_controllerConnectionHandler.IsControllerValid(controllerId) && gesture.Type == MLInputControllerTouchpadGestureType.Swipe)
-            {
-                if (gesture.Direction == MLInputControllerTouchpadGestureDirection.Right)
-                {
-                }
-                else if (gesture.Direction == MLInputControllerTouchpadGestureDirection.Left)
-                {
                 }
             }
         }

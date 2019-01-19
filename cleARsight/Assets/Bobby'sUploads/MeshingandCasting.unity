@@ -266,6 +266,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4486541323493368, guid: b6af97b52b3429641aa904690975fa80,
     type: 2}
   m_PrefabInternal: {fileID: 1370683652}
+--- !u!114 &548439766 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114276642067609004, guid: 465ccad4e15b4164f81a774b9908bd98,
+    type: 2}
+  m_PrefabInternal: {fileID: 923056172}
+  m_Script: {fileID: 11500000, guid: 97d97f3bfb1874341bd827a81a6bb64f, type: 3}
 --- !u!1 &657357526
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,6 +756,7 @@ GameObject:
   - component: {fileID: 1419141728}
   - component: {fileID: 1419141725}
   - component: {fileID: 1419141724}
+  - component: {fileID: 1419141730}
   - component: {fileID: 1419141726}
   - component: {fileID: 1419141727}
   m_Layer: 0
@@ -976,6 +983,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1419141723}
   m_Mesh: {fileID: 4300000, guid: 469d0d5dd3558804ca56a8d0fa774dae, type: 3}
+--- !u!114 &1419141730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1419141723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47db920294a27914fbf711df04cb6797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controllerConnectionHandler: {fileID: 548439766}
+  raycaster: {fileID: 1419141724}
+  distance: 0
 --- !u!1 &1462129510
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,6 +1314,10 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960203766818606, guid: 4b13f92626657f949936c461c3c3182e, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4b13f92626657f949936c461c3c3182e, type: 2}
