@@ -1,13 +1,20 @@
-﻿Shader "PeterLu/OutlineShader"
+﻿Shader "PeterLu/OutlineShaderHorizontal"
 {
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
-		_Overlay("_Overlay", Color) = (0,0,0,0)
-		_OutlineColor("Outline Color", Color) = (0,0,0,0)
+		[Space(20)]
+		[Header(Overlay Colors)]
+		_OverlayHorizontal("Overlay Color Horizontal", Color) = (0,0,0,0)
+		_OverlayVertical("Overlay Color Vertical", Color) = (0,0,0,0)
+		[Space(20)]
+		[Header(Outline Colors)]
+		_OutlineColorHorizontal("Outline Color Horizontal", Color) = (0,0,0,0)
+		_OutlineColorVertical("Outline Color Vertical", Color) = (0,0,0,0)
+
 		_OutlineStrength("Outline Strength", Range(0.01, 0.3)) = 0.01
-		_FalloffThreshould ("Falloff Threshould", Range(0,9)) = 5
-		_FalloffPower("Falloff power", Range(0,10)) = 5
+
+		_HorizontalNormalRange("Horizontal Range", float) = 0
 	}
 	SubShader
 	{
@@ -42,11 +49,15 @@
 				UNITY_FOG_COORDS(1)
 				float4 vertex : SV_POSITION;
 				float4 color : COLOR;
+				half3 worldNormal : TEXCOORD0;
 			};
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
-			fixed4 _OutlineColor;
+			fixed4 _OutlineColorHorizontal;
+			fixed4 _OutlineColorVertical;
+
+			float _HorizontalNormalRange;
 			
 			float _OutlineStrength;
 			float _FalloffThreshould;
@@ -64,9 +75,8 @@
 				
 				//extrude by the offset
 				o.vertex.xyz += offset * _OutlineStrength;
-				
-				//change the vertex color
-				o.color = _OutlineColor;
+				o.worldNormal = UnityObjectToWorldNormal(v.normal);
+
 
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				return o;
@@ -74,25 +84,36 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				//returns the outline color with fog
-				fixed4 col = _OutlineColor;
-				/*
-				float alphaValue;
-				float dist = distance(i.vertex, camPos);
+				fixed4 col;
 
-				if(dist > _FalloffThreshould)
+				/*
+				if(abs(1 - i.worldNormal.y) < _HorizontalNormalRange)
 				{
-					alphaValue = saturate(abs(_FalloffThreshould - dist) / _FalloffPower);
+					col = _OutlineColorHorizontal;
+				}
+				else
+				{
+					col = _OutlineColorVertical;
+				}
+				*/
+
+				//col = float4(0, i.worldNormal.y, 0, 1);
+
+				if(i.worldNormal.y > _HorizontalNormalRange)
+				{
+					col = _OutlineColorHorizontal;
+				}
+				else{
+					col = _OutlineColorVertical;
 				}
 
-				col.a = alphaValue;
-				*/
 				UNITY_APPLY_FOG(i.fogCoord, col);
 				return col;
 			}
 			ENDCG
 		}
 
+		/*
 		Pass {
             Name "GrabOffset"
             Cull Back
@@ -113,7 +134,10 @@
             float3 normal : NORMAL;
 	    };
                
-			float4 _Overlay;
+			float4 _OverlayHorizontal;
+			float4 _OverlayVertical;
+
+			float _HorizontalNormalRange;
      
             struct v2f {
                 float4 pos : POSITION;
@@ -138,11 +162,21 @@
      
             fixed4 frag (v2f i) : COLOR
             {
-                
-                fixed4 col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _Overlay;
+			fixed4 col;
+
+                if(abs(1 - i.normal.y) < _HorizontalNormalRange)
+				{
+					 col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayHorizontal;
+				}
+				else
+				{
+					 col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayVertical;
+				}
+
 				return col;
             }
             ENDCG
         }
+		*/
 	}
 }
