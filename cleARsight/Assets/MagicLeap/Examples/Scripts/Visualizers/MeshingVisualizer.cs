@@ -185,6 +185,8 @@ namespace MagicLeap
             if (_mlSpatialMapper.meshIdToGameObjectMap.ContainsKey(meshId))
             {
                 UpdateRenderer(_mlSpatialMapper.meshIdToGameObjectMap[meshId].GetComponent<MeshRenderer>());
+
+                
             }
         }
         #endregion
