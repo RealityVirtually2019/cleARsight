@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Outline
-  m_Shader: {fileID: 4800000, guid: c699151810d45f34e96cd72b0a3d1468, type: 3}
+  m_Shader: {fileID: 4800000, guid: 7975457374637674580644a4916bf28f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -64,10 +64,11 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _HorizontalNormalRange: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineStrength: 0.01
+    - _OutlineStrength: 0.035
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -77,6 +78,10 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 1, g: 0.9054732, b: 0, a: 1}
+    - _OutlineColor: {r: 1, g: 0.90588236, b: 0, a: 1}
+    - _OutlineColorHorizontal: {r: 0.5999013, g: 1, b: 0, a: 1}
+    - _OutlineColorVertical: {r: 1, g: 0, b: 0, a: 1}
     - _Overlay: {r: 0, g: 0, b: 0, a: 1}
+    - _OverlayHorizontal: {r: 1, g: 1, b: 1, a: 1}
+    - _OverlayVertical: {r: 1, g: 0, b: 0, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}

@@ -3,14 +3,15 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
+
 		[Space(20)]
 		[Header(Overlay Colors)]
 		_OverlayHorizontal("Overlay Color Horizontal", Color) = (0,0,0,0)
 		_OverlayVertical("Overlay Color Vertical", Color) = (0,0,0,0)
+		
 		[Space(20)]
 		[Header(Outline Colors)]
-		_OutlineColorHorizontal("Outline Color Horizontal", Color) = (0,0,0,0)
-		_OutlineColorVertical("Outline Color Vertical", Color) = (0,0,0,0)
+		_OutlineColor("Outline Color", Color) = (0,0,0,0)
 
 		_OutlineStrength("Outline Strength", Range(0.01, 0.3)) = 0.01
 
@@ -54,8 +55,7 @@
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
-			fixed4 _OutlineColorHorizontal;
-			fixed4 _OutlineColorVertical;
+			fixed4 _OutlineColor;
 
 			float _HorizontalNormalRange;
 			
@@ -84,36 +84,15 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				fixed4 col;
-
-				/*
-				if(abs(1 - i.worldNormal.y) < _HorizontalNormalRange)
-				{
-					col = _OutlineColorHorizontal;
-				}
-				else
-				{
-					col = _OutlineColorVertical;
-				}
-				*/
-
-				//col = float4(0, i.worldNormal.y, 0, 1);
-
-				if(i.worldNormal.y > _HorizontalNormalRange)
-				{
-					col = _OutlineColorHorizontal;
-				}
-				else{
-					col = _OutlineColorVertical;
-				}
-
+				fixed4 col = _OutlineColor;
+				
 				UNITY_APPLY_FOG(i.fogCoord, col);
 				return col;
 			}
 			ENDCG
 		}
 
-		/*
+		
 		Pass {
             Name "GrabOffset"
             Cull Back
@@ -162,21 +141,25 @@
      
             fixed4 frag (v2f i) : COLOR
             {
-			fixed4 col;
-
-                if(abs(1 - i.normal.y) < _HorizontalNormalRange)
+				fixed4 col;
+				
+				if(i.normal.y > _HorizontalNormalRange)
 				{
 					 col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayHorizontal;
 				}
 				else
 				{
-					 col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayVertical;
+					col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayVertical;
 				}
+				
+				
+				
+				//col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + saturate(_OverlayHorizontal * abs(i.normal.y)) + saturate(_OverlayVertical * i.normal.x);
 
 				return col;
             }
             ENDCG
         }
-		*/
+		
 	}
 }
