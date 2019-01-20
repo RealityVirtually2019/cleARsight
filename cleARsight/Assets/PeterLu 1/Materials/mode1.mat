@@ -56,7 +56,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _CutOffLevel: -0.24
+    - _CutOffLevel: -0.14
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -71,7 +71,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GroundLevel: -0.89
+    - _GroundLevel: 0.25
     - _HoloDistance: 0.589
     - _HoloValue: 7.43
     - _HorizontalNormalRange: 0.66
