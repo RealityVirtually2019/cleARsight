@@ -290,6 +290,7 @@ public class GameManager : MonoBehaviour
 
     void StopVoiceOver()
     {
-        turotialAudioSource.Stop();
+        if(turotialAudioSource.isPlaying)
+            turotialAudioSource.Stop();
     }
 }

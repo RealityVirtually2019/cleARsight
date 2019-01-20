@@ -694,9 +694,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOnStandBy: 0
   tutorialVoiceOver: {fileID: 8300000, guid: 24ab146c98432654388f2b2372e992d3, type: 3}
-  standbyModeActivatedAudio: {fileID: 8300000, guid: 46b3b10690ce0a542a82c4707141cde6,
+  standbyModeActivatedAudio: {fileID: 8300000, guid: 040ea81b89866374dafb6219edccec06,
     type: 3}
-  activeModeActivatedAudio: {fileID: 8300000, guid: 9eb554e049ff2d4428058a9c96630fa0,
+  activeModeActivatedAudio: {fileID: 8300000, guid: 2833e7e0e831b9b499b136ee5d8bd2af,
     type: 3}
   triggerPressedVO: {fileID: 8300000, guid: c8c24d3303972af4e95a48adbeb963bc, type: 3}
   bumperPressedVO: {fileID: 8300000, guid: 908e7f7a0cf5fc444839e4fe93911894, type: 3}
