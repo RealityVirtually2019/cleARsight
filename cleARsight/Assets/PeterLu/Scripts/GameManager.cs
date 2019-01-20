@@ -195,10 +195,6 @@ public class GameManager : MonoBehaviour
         {
             isOnStandBy = !isOnStandBy;
         }
-        else if(button == MLInputControllerButton.HomeTap && button == MLInputControllerButton.Bumper)
-        {
-            StartVoiceOver(tutorialVoiceOver);
-        }
         if(isOnStandBy)
         {
             if (button == MLInputControllerButton.Bumper)
@@ -237,6 +233,10 @@ public class GameManager : MonoBehaviour
                 else if (gesture.Direction == MLInputControllerTouchpadGestureDirection.Down)
                 {
                     SwipedDown();
+                }
+                else if (gesture.Direction == MLInputControllerTouchpadGestureDirection.Left)
+                {
+                    StartVoiceOver(tutorialVoiceOver);
                 }
             }
         }
