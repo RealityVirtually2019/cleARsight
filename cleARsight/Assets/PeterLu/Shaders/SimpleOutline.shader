@@ -31,7 +31,7 @@ Shader "PeterLu/SimpleOutline"
 		_HoloDistance ("Holo Distance", Range(0,1)) = 0.5
 		_HoloDirection("Holo Direction", Vector) = (0,1,0,0)
 		_EmissionMultiplier("Emission Multiplier", Float) = 1
-		_Speed("Speed", Float) = 1
+		_Speed("Speed", Range(0,1)) = 0
 
 			[Space(50)]
 		_GroundLevel("Ground level", Float) = -1
@@ -200,7 +200,7 @@ Shader "PeterLu/SimpleOutline"
 				{
 					if(i.normal.y > _HorizontalNormalRange && i.worldPos.y > _GroundLevel)
 					{
-						if(frac((finalP + _Time.y/_Speed) * _HoloValue) > _HoloDistance)
+						if(frac((finalP + _Time.y * _Speed) * _HoloValue) > _HoloDistance)
 						{
 							col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayHorizontal * pow(saturate(_FalloffDistance / distance(_CamPos, i.worldPos)), _FalloffPower);
 						}
@@ -211,7 +211,7 @@ Shader "PeterLu/SimpleOutline"
 					}
 					else if (i.normal.y > _HorizontalNormalRange && i.worldPos.y < _GroundLevel)
 					{
-						if (frac((finalP + _Time.y / _Speed) * _HoloValue) > _HoloDistance)
+						if (frac((finalP + _Time.y * _Speed) * _HoloValue) > _HoloDistance)
 						{
 							col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayUnderground * pow(saturate(_FalloffDistance / distance(_CamPos, i.worldPos)), _FalloffPower);
 						}
