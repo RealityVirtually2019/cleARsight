@@ -35,6 +35,8 @@ namespace MagicLeap
         [SerializeField, Space, Tooltip("Flag specifying if mesh extents are bounded.")]
         private bool _bounded = false;
 
+        [SerializeField, Space, Tooltip("Manager to determine controller state.")]
+        private GameManager manager;
 
         [SerializeField, Space, Tooltip("ControllerConnectionHandler reference.")]
         private ControllerConnectionHandler _controllerConnectionHandler;
@@ -85,7 +87,6 @@ namespace MagicLeap
             MLInput.OnControllerButtonDown += OnButtonDown;
             MLInput.OnTriggerDown += OnTriggerDown;
             MLInput.OnTriggerUp += OnTriggerUp;
-            MLInput.OnControllerTouchpadGestureStart += OnTouchpadGestureStart;
             MagicLeapDevice.RegisterOnHeadTrackingMapEvent(OnHeadTrackingMapEvent);
         }
 
@@ -115,7 +116,6 @@ namespace MagicLeap
         void OnDestroy()
         {
             MagicLeapDevice.UnregisterOnHeadTrackingMapEvent(OnHeadTrackingMapEvent);
-            MLInput.OnControllerTouchpadGestureStart -= OnTouchpadGestureStart;
             MLInput.OnTriggerDown -= OnTriggerDown;
             MLInput.OnTriggerUp -= OnTriggerUp;
             MLInput.OnControllerButtonDown -= OnButtonDown;
@@ -134,16 +134,19 @@ namespace MagicLeap
         {
             if (_controllerConnectionHandler.IsControllerValid(controllerId))
             {
-                if (button == MLInputControllerButton.Bumper)
+                if (!manager.isOnStandBy)
                 {
-                    _renderMode = (cleARsightVisualizer.RenderMode)((int)(_renderMode + 1) % _renderModeCount);
-                    _meshingVisualizer.SetRenderers(_renderMode);
-                }
-                else if (button == MLInputControllerButton.HomeTap)
-                {
-                    _bounded = !_bounded;
-                    
-                    _mlSpatialMapper.gameObject.transform.localScale = _bounded ? _boundedExtentsSize : _boundlessExtentsSize;
+                    if (button == MLInputControllerButton.Bumper)
+                    {
+                        _renderMode = (cleARsightVisualizer.RenderMode)((int)(_renderMode + 1) % _renderModeCount);
+                        _meshingVisualizer.SetRenderers(_renderMode);
+                    }
+                    else if (button == MLInputControllerButton.HomeTap)
+                    {
+                        _bounded = !_bounded;
+
+                        _mlSpatialMapper.gameObject.transform.localScale = _bounded ? _boundedExtentsSize : _boundlessExtentsSize;
+                    }
                 }
                 
             }
@@ -159,7 +162,10 @@ namespace MagicLeap
         {
             if (_controllerConnectionHandler.IsControllerValid(controllerId))
             {
-                raycastHit.SetActive(true);
+                if (!manager.isOnStandBy)
+                {
+                    raycastHit.SetActive(true);
+                }
             }
         }
 
@@ -173,22 +179,10 @@ namespace MagicLeap
         {
             if (_controllerConnectionHandler.IsControllerValid(controllerId))
             {
-                raycastHit.SetActive(false);
-            }
-        }
-
-        /// <summary>
-        /// Handles the event for touchpad gesture start. Changes level of detail
-        /// if gesture is swipe up.
-        /// </summary>
-        /// <param name="controllerId">The id of the controller.</param>
-        /// <param name="gesture">The gesture getting started.</param>
-        private void OnTouchpadGestureStart(byte controllerId, MLInputControllerTouchpadGesture gesture)
-        {
-            if (_controllerConnectionHandler.IsControllerValid(controllerId) &&
-                gesture.Type == MLInputControllerTouchpadGestureType.Swipe && gesture.Direction == MLInputControllerTouchpadGestureDirection.Up)
-            {
-                _mlSpatialMapper.levelOfDetail = ((_mlSpatialMapper.levelOfDetail == MLSpatialMapper.LevelOfDetail.Maximum) ? MLSpatialMapper.LevelOfDetail.Minimum : (_mlSpatialMapper.levelOfDetail + 1));
+                if (!manager.isOnStandBy)
+                {
+                    raycastHit.SetActive(false);
+                }
             }
         }
 

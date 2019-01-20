@@ -22,7 +22,9 @@ namespace MagicLeap
 
         [SerializeField, Tooltip("The audio source that should replay the captured audio.")]
         private AudioSource _playbackAudioSource;
-        
+
+        [SerializeField, Tooltip("The controller input manager.")]
+        private GameManager manager;
 
         public GameObject memoPrefab;
         public Transform controller;
@@ -71,13 +73,16 @@ namespace MagicLeap
             _privilegeRequester = GetComponent<PrivilegeRequester>();
 
             _privilegeRequester.OnPrivilegesDone += HandleOnPrivilegesDone;
-            MLInput.OnControllerButtonDown += HandleOnButtonDown;
+            //MLInput.OnControllerButtonDown += HandleOnButtonDown;
+            MLInput.OnControllerTouchpadGestureEnd += HandleOnTouchpadGestureEnd;
         }
 
         void OnDestroy()
         {
             _privilegeRequester.OnPrivilegesDone -= HandleOnPrivilegesDone;
-            MLInput.OnControllerButtonDown -= HandleOnButtonDown;
+            //MLInput.OnControllerButtonDown -= HandleOnButtonDown;
+
+            MLInput.OnControllerTouchpadGestureEnd -= HandleOnTouchpadGestureEnd;
 
             StopCapture();
         }
@@ -196,7 +201,7 @@ namespace MagicLeap
 
         }
 
-        private void HandleOnButtonDown(byte controllerId, MLInputControllerButton button)
+        /*private void HandleOnButtonDown(byte controllerId, MLInputControllerButton button)
         {
             if (_controllerConnectionHandler.IsControllerValid(controllerId))
             {
@@ -214,6 +219,34 @@ namespace MagicLeap
                     else
                     {
                         StartCapture();
+                    }
+                }
+            }
+        }*/
+
+        private void HandleOnTouchpadGestureEnd(byte controllerId, MLInputControllerTouchpadGesture gesture)
+        {
+            if (!manager.isOnStandBy)
+            {
+                if (gesture.Type == MLInputControllerTouchpadGestureType.Swipe)
+                {
+                    if (gesture.Direction == MLInputControllerTouchpadGestureDirection.Up)
+                    {
+
+                        if(!_isCapturing)
+                        {
+                            StartCapture();
+                        }
+                    }
+                    else if (gesture.Direction == MLInputControllerTouchpadGestureDirection.Down)
+                    {
+                        // Stop & Start to clear the previous mode.
+                        if (_isCapturing)
+                        {
+                            _audioDetectionEnd = Time.time - startTime;
+                            StopCapture();
+                            MakeMemo();
+                        }
                     }
                 }
             }
