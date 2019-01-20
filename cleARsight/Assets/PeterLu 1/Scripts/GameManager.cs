@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public bool isOnStandBy;
 
     bool toggleStandBy;
-    bool toggleActive = true;
+    bool toggleActive = false;
 
     public AudioClip tutorialVoiceOver;
 
@@ -40,6 +40,10 @@ public class GameManager : MonoBehaviour
 
     public cleARsightVisualizer visualizer;
 
+    public GameObject hitCast;
+    public AudioSource controllerAudioSource;
+    public AudioSource turotialAudioSource;
+
     private void Awake()
     {
         instance = this;
@@ -54,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        audioSource = Camera.main.GetComponentInChildren<AudioSource>();
+        audioSource = controllerAudioSource;
     }
 
     private void Update()
@@ -79,6 +83,7 @@ public class GameManager : MonoBehaviour
             toggleActive = false;
 
             visualizer.SetRenderers(cleARsightVisualizer.RenderMode.None);
+            hitCast.SetActive(false);
         }
 
         StandByModeControlCheck();
@@ -104,7 +109,7 @@ public class GameManager : MonoBehaviour
             audioSource.Play();
             toggleActive = true;
             toggleStandBy = false;
-            visualizer.SetRenderers(cleARsightVisualizer.RenderMode.Both);
+            visualizer.SetRenderers(cleARsightVisualizer.RenderMode.Outline);
         }
     }
 
@@ -250,6 +255,10 @@ public class GameManager : MonoBehaviour
                 {
                     StartVoiceOver(tutorialVoiceOver);
                 }
+                else if (gesture.Direction == MLInputControllerTouchpadGestureDirection.Right)
+                {
+                    StopVoiceOver();
+                }
             }
         }
 
@@ -275,7 +284,12 @@ public class GameManager : MonoBehaviour
 
     void StartVoiceOver(AudioClip audioClip)
     {
-        audioSource.clip = audioClip;
-        audioSource.Play();
+        turotialAudioSource.clip = audioClip;
+        turotialAudioSource.Play();
+    }
+
+    void StopVoiceOver()
+    {
+        turotialAudioSource.Stop();
     }
 }

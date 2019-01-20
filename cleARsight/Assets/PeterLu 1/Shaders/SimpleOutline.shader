@@ -31,10 +31,11 @@ Shader "PeterLu/SimpleOutline"
 		_HoloDistance ("Holo Distance", Range(0,1)) = 0.5
 		_HoloDirection("Holo Direction", Vector) = (0,1,0,0)
 		_EmissionMultiplier("Emission Multiplier", Float) = 1
-		_Speed("Speed", Float) = 1
+		_Speed("Speed", Range(0,1)) = 0
 
 			[Space(50)]
 		_GroundLevel("Ground level", Float) = -1
+		_CutOffLevel("Cutoff level", Float) = -1
 
 	}
 	SubShader
@@ -85,9 +86,9 @@ Shader "PeterLu/SimpleOutline"
 			float _OutlineStrength;
 
 			float _GroundLevel;
+			float _CutOffLevel;
 
-			uniform float4 _CamPos; 
-			uniform float worldGroundHeight;
+			uniform float4 _CamPos;
 
 			v2f vert (appdata v)
 			{
@@ -108,9 +109,16 @@ Shader "PeterLu/SimpleOutline"
 			fixed4 frag (v2f i) : SV_Target
 			{
 				fixed4 col;
-				if(i.worldPos.y > _GroundLevel)
+				if(i.worldPos.y > _CutOffLevel)
 				{
-					col = _OutlineColor * pow(saturate(_FalloffDistance / distance(_CamPos, i.worldPos)), _FalloffPower);
+					if(i.worldPos.y > _GroundLevel)
+					{
+						col = _OutlineColor * pow(saturate(_FalloffDistance / distance(_CamPos, i.worldPos)), _FalloffPower);
+					}
+					else
+					{
+						col = (0, 0, 0, 0);
+					}
 				}
 				else
 				{
@@ -153,8 +161,8 @@ Shader "PeterLu/SimpleOutline"
 			float _FalloffDistance;
 			float _FalloffPower;
 			float _GroundLevel;
-			uniform float4 _CamPos; 
-			uniform float worldGroundHeight;
+			float _CutOffLevel;
+			uniform float4 _CamPos;
 			
 
 			float4 _HoloDirection;
@@ -188,22 +196,29 @@ Shader "PeterLu/SimpleOutline"
 				
 				float finalP = i.worldPos.x * _HoloDirection.x + i.worldPos.y * _HoloDirection.y + i.worldPos.z * _HoloDirection.z;
 				
-				if(i.normal.y > _HorizontalNormalRange && i.worldPos.y > _GroundLevel)
+				if(i.worldPos.y > _CutOffLevel)
 				{
-					if(frac((finalP + _Time.y/_Speed) * _HoloValue) > _HoloDistance)
+					if(i.normal.y > _HorizontalNormalRange && i.worldPos.y > _GroundLevel)
 					{
-						col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayHorizontal * pow(saturate(_FalloffDistance / distance(_CamPos, i.worldPos)), _FalloffPower);
+						if(frac((finalP + _Time.y * _Speed) * _HoloValue) > _HoloDistance)
+						{
+							col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayHorizontal * pow(saturate(_FalloffDistance / distance(_CamPos, i.worldPos)), _FalloffPower);
+						}
+						else
+						{
+							col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV));
+						}
 					}
-					else
+					else if (i.normal.y > _HorizontalNormalRange && i.worldPos.y < _GroundLevel)
 					{
-						col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV));
-					}
-				}
-				else if (i.normal.y > _HorizontalNormalRange && i.worldPos.y < _GroundLevel)
-				{
-					if (frac((finalP + _Time.y / _Speed) * _HoloValue) > _HoloDistance)
-					{
-						col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayUnderground * pow(saturate(_FalloffDistance / distance(_CamPos, i.worldPos)), _FalloffPower);
+						if (frac((finalP + _Time.y * _Speed) * _HoloValue) > _HoloDistance)
+						{
+							col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV)) + _OverlayUnderground * pow(saturate(_FalloffDistance / distance(_CamPos, i.worldPos)), _FalloffPower);
+						}
+						else
+						{
+							col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.GrabUV));
+						}
 					}
 					else
 					{

@@ -141,20 +141,13 @@ namespace MagicLeap
                         _renderMode = (cleARsightVisualizer.RenderMode)((int)(_renderMode + 1) % _renderModeCount);
                         _meshingVisualizer.SetRenderers(_renderMode);
                     }
-                    else if (button == MLInputControllerButton.HomeTap)
-                    {
-                        _bounded = !_bounded;
-
-                        _mlSpatialMapper.gameObject.transform.localScale = _bounded ? _boundedExtentsSize : _boundlessExtentsSize;
-                    }
                 }
                 
             }
         }
 
         /// <summary>
-        /// Handles the event for trigger down. Throws a ball in the direction of
-        /// the camera's forward vector.
+        /// Handles the event for trigger down. Switches the raycast on and off
         /// </summary>
         /// <param name="controllerId">The id of the controller.</param>
         /// <param name="button">The button that is being released.</param>
@@ -164,7 +157,7 @@ namespace MagicLeap
             {
                 if (!manager.isOnStandBy)
                 {
-                    raycastHit.SetActive(true);
+                    raycastHit.SetActive(!raycastHit.activeSelf);
                 }
             }
         }
@@ -179,10 +172,10 @@ namespace MagicLeap
         {
             if (_controllerConnectionHandler.IsControllerValid(controllerId))
             {
-                if (!manager.isOnStandBy)
+                /*if (!manager.isOnStandBy)
                 {
                     raycastHit.SetActive(false);
-                }
+                }*/
             }
         }
 

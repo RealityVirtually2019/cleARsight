@@ -8,10 +8,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    bool isOnStandBy;
+    public bool isOnStandBy;
 
     bool toggleStandBy;
-    bool toggleActive;
+    bool toggleActive = false;
 
     public AudioClip tutorialVoiceOver;
 
@@ -40,6 +40,10 @@ public class GameManager : MonoBehaviour
 
     public cleARsightVisualizer visualizer;
 
+    public GameObject hitCast;
+    public AudioSource controllerAudioSource;
+    public AudioSource turotialAudioSource;
+
     private void Awake()
     {
         instance = this;
@@ -47,12 +51,14 @@ public class GameManager : MonoBehaviour
         MLInput.Start();
         MLInput.OnControllerButtonDown += OnButtonDown;
         MLInput.OnControllerButtonUp += OnButtonUp;
+        MLInput.OnControllerTouchpadGestureStart += HandleOnTouchpadGestureStart;
+        MLInput.OnControllerTouchpadGestureEnd += HandleOnTouchpadGestureEnd;
         _controller = MLInput.GetController(MLInput.Hand.Left);
     }
 
     private void Start()
     {
-        audioSource = GetComponentInChildren<AudioSource>();
+        audioSource = controllerAudioSource;
     }
 
     private void Update()
@@ -69,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     void StandByMode()
     {
-        if(!toggleStandBy)
+        if (!toggleStandBy)
         {
             audioSource.clip = standbyModeActivatedAudio;
             audioSource.Play();
@@ -77,6 +83,7 @@ public class GameManager : MonoBehaviour
             toggleActive = false;
 
             visualizer.SetRenderers(cleARsightVisualizer.RenderMode.None);
+            hitCast.SetActive(false);
         }
 
         StandByModeControlCheck();
@@ -96,13 +103,13 @@ public class GameManager : MonoBehaviour
 
     void ActiveMode()
     {
-        if(!toggleActive)
+        if (!toggleActive)
         {
             audioSource.clip = activeModeActivatedAudio;
             audioSource.Play();
             toggleActive = true;
             toggleStandBy = false;
-            visualizer.SetRenderers(cleARsightVisualizer.RenderMode.Both);
+            visualizer.SetRenderers(cleARsightVisualizer.RenderMode.Outline);
         }
     }
 
@@ -192,16 +199,20 @@ public class GameManager : MonoBehaviour
     {
         MLInput.OnControllerButtonDown -= OnButtonDown;
         MLInput.OnControllerButtonUp -= OnButtonUp;
+
+        MLInput.OnControllerTouchpadGestureStart -= HandleOnTouchpadGestureStart;
+        MLInput.OnControllerTouchpadGestureEnd -= HandleOnTouchpadGestureEnd;
+
         MLInput.Stop();
     }
-    
+
     void OnButtonDown(byte controller_id, MLInputControllerButton button)
     {
         if (button == MLInputControllerButton.HomeTap)
         {
             isOnStandBy = !isOnStandBy;
         }
-        if(isOnStandBy)
+        if (isOnStandBy)
         {
             if (button == MLInputControllerButton.Bumper)
             {
@@ -228,7 +239,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleOnTouchpadGestureStart(byte controllerId, MLInputControllerTouchpadGesture gesture)
     {
-        if(isOnStandBy)
+        if (isOnStandBy)
         {
             if (gesture.Type == MLInputControllerTouchpadGestureType.Swipe)
             {
@@ -244,6 +255,10 @@ public class GameManager : MonoBehaviour
                 {
                     StartVoiceOver(tutorialVoiceOver);
                 }
+                else if (gesture.Direction == MLInputControllerTouchpadGestureDirection.Right)
+                {
+                    StopVoiceOver();
+                }
             }
         }
 
@@ -251,7 +266,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleOnTouchpadGestureEnd(byte controllerId, MLInputControllerTouchpadGesture gesture)
     {
-        if(isOnStandBy)
+        if (isOnStandBy)
         {
             if (gesture.Type == MLInputControllerTouchpadGestureType.Swipe)
             {
@@ -259,7 +274,7 @@ public class GameManager : MonoBehaviour
                 {
                     SwipeUpOff();
                 }
-                else if (gesture.Direction == MLInputControllerTouchpadGestureDirection.Left)
+                else if (gesture.Direction == MLInputControllerTouchpadGestureDirection.Down)
                 {
                     SwipeDownOff();
                 }
@@ -269,7 +284,12 @@ public class GameManager : MonoBehaviour
 
     void StartVoiceOver(AudioClip audioClip)
     {
-        audioSource.clip = audioClip;
-        audioSource.Play();
+        turotialAudioSource.clip = audioClip;
+        turotialAudioSource.Play();
+    }
+
+    void StopVoiceOver()
+    {
+        turotialAudioSource.Stop();
     }
 }
