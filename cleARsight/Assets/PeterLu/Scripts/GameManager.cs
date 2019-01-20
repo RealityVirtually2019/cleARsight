@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.MagicLeap;
+using MagicLeap;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class GameManager : MonoBehaviour
     private AudioSource audioSource;
 
     private MLInputController _controller;
+
+    public cleARsightVisualizer visualizer;
 
     private void Awake()
     {
@@ -72,6 +75,8 @@ public class GameManager : MonoBehaviour
             audioSource.Play();
             toggleStandBy = true;
             toggleActive = false;
+
+            visualizer.SetRenderers(cleARsightVisualizer.RenderMode.None);
         }
 
         StandByModeControlCheck();
@@ -97,6 +102,7 @@ public class GameManager : MonoBehaviour
             audioSource.Play();
             toggleActive = true;
             toggleStandBy = false;
+            visualizer.SetRenderers(cleARsightVisualizer.RenderMode.Both);
         }
     }
 
