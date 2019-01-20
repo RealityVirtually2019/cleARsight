@@ -614,6 +614,7 @@ MonoBehaviour:
   bumperLabel: {fileID: 1471253383}
   swipeUpLabel: {fileID: 1433935174}
   swipeDownLabel: {fileID: 2111797447}
+  visualizer: {fileID: 425187557}
 --- !u!114 &425187556
 MonoBehaviour:
   m_ObjectHideFlags: 0
